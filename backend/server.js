@@ -80,8 +80,8 @@ app.post("/contact", async (req, res) => {
     });
 
     const mailOptions = {
-      from: email,
-      to: process.env.EMAIL_USER,
+      from: `"${name}" <${process.env.EMAIL_USER}>`,
+      replyTo: email,
       subject: `Portfolio Contact from ${name}`,
       text: `
 Name: ${name}
