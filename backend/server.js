@@ -18,8 +18,7 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Heartbeat to make sure server is alive
-setInterval(() => console.log("Server still alive..."), 5050);
+
 
 app.post("/chat", async (req, res) => {
   const userMessage = req.body.message;
@@ -104,5 +103,5 @@ app.get("/test-resend", async (req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT
 app.listen(PORT, () => console.log("Server running on", PORT));
