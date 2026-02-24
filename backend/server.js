@@ -73,7 +73,7 @@ app.post("/contact", async (req, res) => {
   try {
     const data = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: ["mcuevas9151@gmail.com"], // change this to YOUR email
+      to: ["cuevasnm@kean.edu"], // change this to YOUR email
       subject: `Portfolio Contact from ${name}`,
       reply_to: email,
       text: `
@@ -96,7 +96,7 @@ ${message}
 app.get("/test-resend", async (req, res) => {
   const data = await resend.emails.send({
     from: "Test <onboarding@resend.dev>",
-    to: ["mcuevas9151@gmail.com"],
+    to: ["cuevasnm@kean.edu"],
     subject: "Resend Test",
     text: "It works!",
   });
