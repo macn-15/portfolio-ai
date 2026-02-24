@@ -1,20 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
   const [menuOpen, setMenuOpen] = useState(false);
+  const navRef = useRef(null); // reference to navbar
 
   const sections = ["hero", "about", "education", "projects", "chat", "contact"];
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false); // close mobile menu after click
+    if (element && navRef.current) {
+      const navbarHeight = navRef.current.offsetHeight; // get height dynamically
+      const topPos = element.offsetTop - navbarHeight;
+      window.scrollTo({ top: topPos, behavior: "smooth" });
+      setMenuOpen(false); // close mobile menu
+    }
   };
 
+  // Track scrolling to update active section
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight / 2;
+      const scrollPos = window.scrollY + (navRef.current?.offsetHeight || 0) + window.innerHeight / 2;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
@@ -30,11 +36,14 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-md shadow-md">
+    <nav
+      ref={navRef}
+      className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-md shadow-md"
+    >
       <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
 
         {/* Logo / Name */}
-        <div className="text-lg font-bold text-blue-400">Portfolio</div>
+        <div className="text-lg font-bold text-blue-400">Miguel</div>
 
         {/* Desktop Links */}
         <div className="hidden md:flex space-x-8">
