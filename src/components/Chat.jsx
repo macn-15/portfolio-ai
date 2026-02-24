@@ -16,7 +16,7 @@ const handleSend = async () => {
   setStatus("Typing..."); 
 
   try {
-    const res = await fetch("https://portfolio-ai-usmb.onrender.com", {
+    const res = await fetch("https://portfolio-ai-usmb.onrender.com/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: input }),
