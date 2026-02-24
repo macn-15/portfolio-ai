@@ -66,6 +66,7 @@ User question: ${userMessage}
 });
 
 app.post("/contact", async (req, res) => {
+  console.log("CONTACT ENDPOINT HIT:", req.body);
   const { name, email, message } = req.body;
   
   try {
