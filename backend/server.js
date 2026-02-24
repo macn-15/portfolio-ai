@@ -99,8 +99,5 @@ ${message}
 });
 
 // Start server
-const PORT = 5050;
-app.listen(PORT, () => {
-  console.log(`AI server running on http://localhost:${PORT}`);
-  console.log("OPENAI_API_KEY is set?", !!process.env.OPENAI_API_KEY);
-});
+const PORT = process.env.PORT || 5050;
+app.listen(PORT, () => console.log("Server running on", PORT));
