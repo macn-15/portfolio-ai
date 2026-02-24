@@ -4,9 +4,10 @@ import OpenAI from "openai";
 import cors from "cors";
 import dotenv from "dotenv";
 
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 dotenv.config();
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const app = express();
 app.use(cors());
@@ -66,24 +67,15 @@ User question: ${userMessage}
 });
 
 app.post("/contact", async (req, res) => {
-  console.log("CONTACT ENDPOINT HIT:", req.body);
   const { name, email, message } = req.body;
-  
-  try {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false, // MUST be false for port 587
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+  console.log("CONTACT HIT:", req.body);
 
-    const mailOptions = {
-      from: `"${name}" <${process.env.EMAIL_USER}>`,
-      replyTo: email,
+  try {
+    const data = await resend.emails.send({
+      from: "Portfolio Contact <onboarding@resend.dev>",
+      to: ["YOUR_EMAIL@gmail.com"], // change this to YOUR email
       subject: `Portfolio Contact from ${name}`,
+      reply_to: email,
       text: `
 Name: ${name}
 Email: ${email}
@@ -91,15 +83,14 @@ Email: ${email}
 Message:
 ${message}
       `,
-    };
+    });
 
-    await transporter.sendMail(mailOptions);
+    console.log("Email sent:", data);
     res.json({ success: true });
   } catch (err) {
-    console.error("Email error:", err);
+    console.error("Resend error:", err);
     res.status(500).json({ success: false });
   }
-  console.log("Contact request:", name, email);
 });
 
 // Start server
