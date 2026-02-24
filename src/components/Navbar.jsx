@@ -34,7 +34,7 @@ function Navbar() {
       <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
 
         {/* Logo / Name */}
-        <div className="text-lg font-bold text-blue-400">Miguel</div>
+        <div className="text-lg font-bold text-blue-400">Portfolio</div>
 
         {/* Desktop Links */}
         <div className="hidden md:flex space-x-8">
