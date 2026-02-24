@@ -73,7 +73,7 @@ app.post("/contact", async (req, res) => {
   try {
     const data = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: ["YOUR_EMAIL@gmail.com"], // change this to YOUR email
+      to: ["mcuevas9151@gmail.com"], // change this to YOUR email
       subject: `Portfolio Contact from ${name}`,
       reply_to: email,
       text: `
@@ -91,6 +91,16 @@ ${message}
     console.error("Resend error:", err);
     res.status(500).json({ success: false });
   }
+});
+
+app.get("/test-resend", async (req, res) => {
+  const data = await resend.emails.send({
+    from: "Test <onboarding@resend.dev>",
+    to: ["mcuevas9151@gmail.com"],
+    subject: "Resend Test",
+    text: "It works!",
+  });
+  res.json(data);
 });
 
 // Start server
