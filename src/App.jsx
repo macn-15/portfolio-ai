@@ -12,7 +12,7 @@ function App() {
       <Navbar />
 
       <main className="flex flex-col">
-        <section className="flex flex-col justify-center items-center min-h-screen px-6">
+        <section id="hero" className="flex flex-col justify-center items-center min-h-screen px-6">
           <Hero />
         </section>
 
