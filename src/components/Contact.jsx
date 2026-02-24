@@ -1,4 +1,4 @@
-
+//Contact.jsx
 import { useState } from "react";
 import { FaUser, FaEnvelope, FaComment } from "react-icons/fa";
 
@@ -19,7 +19,8 @@ function Contact() {
         body: JSON.stringify(form),
       });
       const data = await res.json();
-      setStatus(data.reply);
+      if (data.success) setStatus("✅ Message sent!");
+      else setStatus("⚠️ Failed to send.");
       setForm({ name: "", email: "", message: "" });
     } catch (err) {
       setStatus("⚠️ Error sending message.");
