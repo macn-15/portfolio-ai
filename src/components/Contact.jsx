@@ -13,7 +13,7 @@ function Contact() {
     setStatus("Sending...");
 
     try {
-      const res = await fetch("http://localhost:5050/contact", {
+      const res = await fetch("https://portfolio-ai-usmb.onrender.com/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
